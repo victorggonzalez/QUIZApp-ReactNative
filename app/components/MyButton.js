@@ -1,6 +1,8 @@
 import React from 'react';
+import {View, Text, Image, Button, StyleSheet} from 'react-native';
 
-export default class Button extends React.Component {
+
+export default class MyButton extends React.Component {
 	
 	constructor(props){
 		super(props);
@@ -35,12 +37,10 @@ export default class Button extends React.Component {
 		}
 	}
 
-
-
-
 	render() {
 		return(
-      <button class="button special fit" style= {this.props.style} disabled={this.disableButton(this.props.currentQuestion) || this.disableAll(this.props.finished)}  onClick={this.props.function}>{this.props.buttonName}</button>
+      <Button title={this.props.buttonName} style={this.props.style} disabled={this.disableButton(this.props.currentQuestion) || this.disableAll(this.props.finished)}  onPress={this.props.function}/>
 		);
 	}
 }
+

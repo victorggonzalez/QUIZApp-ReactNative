@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Image extends React.Component {
+export default class MyImage extends React.Component {
     render(){
       let image = (this.props.question.attachment !== null ) ?
         <img src={this.props.question.attachment.url} style={{width: '100%'}} alt="Imagen de la pregunta"/> :

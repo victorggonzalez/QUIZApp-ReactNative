@@ -1,5 +1,7 @@
 import React from 'react';
-import Image from './Image';
+import {View, Text, Image} from 'react-native';
+
+import MyImage from './MyImage';
 import Question from './Question';
 import Answer from './Answer';
 import Tips from './Tips';
@@ -7,14 +9,9 @@ import Check from './Check';
 
 
 export default class Content extends React.Component{
-  render(){
 
-    let authorPhoto = (this.props.question.author.photo !== null) ?
-    <img src={this.props.question.author.photo.url} width="100" height="100"  alt="Imagen"/> : 
-    <h1 style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</h1>
-
-    return(
-        <section class="box" style={{paddingTop: '40px'}}>
+  /* codigo a cambiar dentro del return
+  <section class="box" style={{paddingTop: '40px'}}>
         <div class="row" style={{height: '40vh'}}>
           <div class="col-4">
             <div class="row">
@@ -51,9 +48,18 @@ export default class Content extends React.Component{
         </div>
         </div>
         </section>
+  */
+  render(){
+/*Cambiar antes del return
+    let authorPhoto = (this.props.question.author.photo !== null) ?
+    <img src={this.props.question.author.photo.url} width="100" height="100"  alt="Imagen"/> : 
+    <h1 style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</h1>
+    */
+
+    return(
+      <View/>
 
     );
   }
-
 
 }

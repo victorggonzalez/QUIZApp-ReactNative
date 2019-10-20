@@ -29,9 +29,11 @@ export default class Navbar extends React.Component{
       <View id="header" className="header" style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin:10}}>
 
         <Text style={styles.header}>QUIZ Game</Text>
-        <Text style={{color: 'white'}}>Time remaining: {this.props.timer} s</Text>
+        
         <TouchableHighlight  onPress={ () => {return this.props.newQuestions();}}>
-            <Text>Reset game</Text>
+            <View style={{backgroundColor: "#6495ed"}}>
+            <Text style ={styles.reset}>Reset game</Text>
+            </View>
         </TouchableHighlight>
 
       </View>
@@ -43,6 +45,10 @@ export default class Navbar extends React.Component{
 const styles = StyleSheet.create({
   header:{
     fontSize: 25, 
+    color: 'white'
+  },
+  reset:{
+    fontSize: 10, 
     color: 'white'
   }
 })
