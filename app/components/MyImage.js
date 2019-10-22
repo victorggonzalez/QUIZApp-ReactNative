@@ -1,21 +1,25 @@
 import React from 'react'
+import {View, Text, Image, YellowBox, StyleSheet} from 'react-native';
+
+/*<Image source={{uri: 'https://facebook.github.io/react/logo-og.png'}}
+                        style={{width: 400, height: 180}} 
+                  />*/
 
 export default class MyImage extends React.Component {
     render(){
       let image = (this.props.question.attachment !== null ) ?
-        <img src={this.props.question.attachment.url} style={{width: '100%'}} alt="Imagen de la pregunta"/> :
-        <h1 style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</h1>
+       (<Image style={{width:340, height:200,alignSelf:'center'}} source={{uri: this.props.question.attachment.url}}/>) :
+        (<Text style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</Text>)
+      
         return(
+              <View style={{flex:1,flexDirection:'column'}}>
+                
+               {image}
 
+                 
+              
+              </View>
 
-              <div>
-              <div key="Image" className="Image">
-                <span class="image fit" width="150">
-                {image}
-                </span>
-              </div>
-              </div>
-
-        )
+        );
     }
 }

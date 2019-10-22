@@ -1,4 +1,6 @@
 import React from 'react';
+import {View, Text, Image, YellowBox, StyleSheet} from 'react-native';
+
 
 //Componente que comprueba si las respuestas son correctas o erroneas y saca un mensaje para cada pregunta
 export default class Check extends React.Component{
@@ -7,20 +9,25 @@ export default class Check extends React.Component{
     //Comprueba que el juego ha finalizado, que la respuesta existe y que es igual que la esperada.
     //En ese caso devolvera un mensaje de acierto
     let check = ((this.props.finished)&&(typeof this.props.question.userAnswer !== "undefined")&&(this.props.question.answer.trim().toUpperCase()===this.props.question.userAnswer.trim().toUpperCase())) ?
-    <h1 style={{color: 'green'}}>Correct answer! :)</h1>:<div/>
+    <Text style={{color: 'green'}}>Correct answer! :)</Text>:<View/>
 
     //Comprueba que el juego ha finalizado, que la respuesta existe y que es distinta que la esperada, y por otro lado
     //comprueba que el juego ha finalizado y que la respuesta no existe.
     //En este caso devolvera un mensaje de fallo
-    let wrong = (((this.props.finished)&&(typeof this.props.question.userAnswer !== "undefined")&&(this.props.question.answer.trim().toUpperCase()!==this.props.question.userAnswer.trim().toUpperCase())
+   let wrong = (((this.props.finished)&&(typeof this.props.question.userAnswer !== "undefined")&&(this.props.question.answer.trim().toUpperCase()!==this.props.question.userAnswer.trim().toUpperCase())
   ) || ((this.props.finished)&&(typeof this.props.question.userAnswer === "undefined"))) ?
-    <h1 style={{color: 'red'}}>Wrong answer :(</h1>:<div/>
+    <Text style={{color: 'red'}}>Wrong answer :(</Text>:<View/>
 
 
     return(
-      <div style={{textAlign: 'center'}}>
-      {check}{wrong}
-      </div>
+   <View style={{flex:1, backgroundColor:'blue'}}>
+             <View style={{flex:1,directionFlex:'row',alignItems:'center'}}>
+                
+                  {check}{wrong}
+                
+            </View>
+    </View> 
+      
     );
   }
 }
