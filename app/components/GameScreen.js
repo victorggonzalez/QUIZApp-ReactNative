@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text, Image, YellowBox, StyleSheet} from 'react-native';
+import {View, Text, Image, YellowBox, StyleSheet, Button, ImageBackground} from 'react-native';
 import {Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 import Game from './Game.js';
 import Navbar from './Navbar.js';
 import {connect} from 'react-redux';
-import {questionAnswer, changeQuestion, initQuestions, submit, timer} from './../reducers/actions';
-//import './App.css';
+import {questionAnswer, changeQuestion, initQuestions, submit} from './../reducers/actions';
 
-
+/*
+<ButtonPrueba
+onPress={() => this.props.navigation.goBack()} text={"Go back"}/>
+*/
 
 
 class GameScreen extends Component{
@@ -31,13 +33,7 @@ class GameScreen extends Component{
           console.log(error);
         });
 
-        var interval = setInterval(() =>{
-          if (this.props.timer === 0){
-            this.props.dispatch(submit(this.props.questions));
-            return 0;
-          }
-          this.props.dispatch(timer(this.props.timer-1));
-          },1000);
+  
 
   }
 
@@ -68,11 +64,18 @@ class GameScreen extends Component{
       onSubmit={(questions)=>this.props.dispatch(submit(questions))}
       score={this.props.score}
       finished={this.props.finished}
-      timer={this.props.timer} />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)
+      goBack={this.props.navigation.goBack}
+       />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)
+
+  let score = (this.props.finished)?
+    <Button onPress={() => this.props.navigation.navigate('ScoreScreen',{score: this.props.score})} 
+    title="Check score"/>:<Button disabled={true}  title="Check score"/>
 
   return (
     <View id="app" style={{flex:1, margin:0, flexDirection: 'column', justifyContent:'center'}}>
-          <View id="navbar" style={{flex:1, backgroundColor: '#6495ed'}} >
+    <ImageBackground source={{uri: "https://fsb.zobj.net/crop.php?r=LuBOBwgmNp41v4868uXfH0ekybj8g5NELLGqbzICDc4K1YDwSbhLQ61O7HR3RSmx3W3g-VioujmVs2xhwUCOoQHkkcvaVWotVd4D8b-rhozvk5Aph51BztNlNvKwTatGmNdbeopREqQGz71I9FjPZ9S1SYhcUaTAKbeUqSWEK5Oqiupg-kNo9oOUuBOgZGe-E5BFa0FWJV26mrKE"}}
+   style={{width:'100%', height: '100%'}}>
+          <View id="navbar" style={{flex:1, backgroundColor: 'transparent'}} >
             <Navbar questions={this.props.questions}
               question={this.props.questions[this.props.currentQuestion]}
               currentQuestion={this.props.currentQuestion}
@@ -82,20 +85,14 @@ class GameScreen extends Component{
               timer={this.props.timer}
               newQuestions={this.newQuestions}
              />
-        
           </View>
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
- 
-            <View id="time" style={{flex:2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                 <Text style={{color: '#6495ed'}}>Time remaining: {this.props.timer} s</Text>
-            </View>
-          </View>
-
           <View id="game" style={{flex:10, flexDirection: 'column'}}>
           {game}
+          
           </View>
-
-    </View>
+          {score}
+        </ImageBackground>
+      </View>
 
 
   );

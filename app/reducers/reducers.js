@@ -34,10 +34,7 @@ function finished(state = false, action = {}){
       return true;
     case INIT_QUESTIONS:
 			return false;
-    case TIMER:
-      if(action.payload.time===0){
-        return true;
-      }
+    
     default:
       return state;
   }
@@ -72,22 +69,6 @@ function questions(state = [], action = {}){
   }
 }
 
-function timer(state = 120, action = {}) {
-	switch (action.type) {
-
-    case SUBMIT:
-      return 0;
-
-    case INIT_QUESTIONS:
-			return 120;
-
-    case TIMER:
-			return action.payload.time;
-
-		default:
-			return state;
-	}
-}
 
 
 
@@ -96,7 +77,6 @@ const GlobalState = (combineReducers({
     finished,
     currentQuestion,
     questions,
-    timer
 }));
 
 export default GlobalState;
