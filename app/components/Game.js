@@ -20,7 +20,7 @@ export default class Game extends React.Component{
                         finished={this.props.finished}
                         />
             </View>
-            <View id="actionbar" style={{flex:1, flexDirection: 'column', backgroundColor: 'red'}}>
+            <View id="actionbar" style={{flex:1, flexDirection: 'column'}}>
                 <Actionbar question={this.props.question}
                           questions={this.props.questions}
                           currentQuestion={this.props.currentQuestion}
@@ -29,6 +29,7 @@ export default class Game extends React.Component{
                           onSubmit={this.props.onSubmit}
                           score={this.props.score}
                           finished={this.props.finished}
+                          goBack={this.props.goBack}
                 />
             </View>
       </View>

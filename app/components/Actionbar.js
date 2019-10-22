@@ -1,8 +1,6 @@
 import React from 'react';
-import {View, Text, Image, Button, StyleSheet} from 'react-native';
-
+import {Alert, View, Text, Image, Button, StyleSheet} from 'react-native';
 import MyButton from './MyButton';
-import Score from './Score';
 
 
 //Componente que contiene cuatro botones: previous y next para cambiar de pregunta, 
@@ -12,12 +10,21 @@ export default class Actionbar extends React.Component{
   render(){
     //Si el juego ha finalizado, se podra comprobar la puntuacion mediante el componente score, 
     //si no, el boton estara desactivado.
-    let score = (this.props.finished) ?
-    <Score score={this.props.score}/> : <Button disabled={!this.props.finished} title="Check score"/>
+
 
     return(
     <View style={{flex:1, flexDirection: 'column'}}>
         <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
+          <MyButton buttonName="<" function={ () => {
+            Alert.alert(
+              "Alert", "You will lose your progress in this quiz",
+              [{text: 'Continue', onPress:()=>  this.props.goBack()},
+              {text: 'Cancel', onPress:()=> console.log('Cancel')}
+              ],{cancelable: false}
+              )
+            
+            }}/>
+
 
           <MyButton buttonName="Previous" currentQuestion={this.props.currentQuestion}  function={ () => {
             if (this.props.currentQuestion!==0){
@@ -35,9 +42,7 @@ export default class Actionbar extends React.Component{
               return this.props.onChangeQuestion(this.props.currentQuestion+1);
             }}}/>
         </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
-        {score}
-        </View>
+     
     </View>
 
 
