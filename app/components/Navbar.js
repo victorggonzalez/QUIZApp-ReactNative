@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, Button, TouchableHighlight, StyleSheet} from 'react-native';
+import {Alert, View, Text, Button, TouchableHighlight, StyleSheet} from 'react-native';
 import Index from './Index';
+import MyButton from './MyButton';
 
 export default class Navbar extends React.Component{
   render(){
@@ -26,15 +27,17 @@ export default class Navbar extends React.Component{
 
           </nav>*/
     return(
-      <View id="header" className="header" style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', margin:10}}>
+      <View id="header" className="header" style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin:10}}>
 
-        
-        
-        <TouchableHighlight  onPress={ () => {return this.props.newQuestions();}}>
-            <View style={{backgroundColor: '#1376D2 '}}>
-            <Text style ={styles.reset}>Reset game</Text>
-            </View>
-        </TouchableHighlight>
+        <MyButton buttonName="< Back" function={ () => {
+            Alert.alert(
+              "Alert", "You will lose your progress in this quiz",
+              [{text: 'Continue', onPress:()=>  this.props.goBack()},
+              {text: 'Cancel', onPress:()=> console.log('Cancel')}
+              ],{cancelable: false}
+              )
+            
+            }}/>
 
       </View>
 

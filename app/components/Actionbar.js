@@ -15,15 +15,7 @@ export default class Actionbar extends React.Component{
     return(
     <View style={{flex:1, flexDirection: 'column'}}>
         <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
-          <MyButton buttonName="<" function={ () => {
-            Alert.alert(
-              "Alert", "You will lose your progress in this quiz",
-              [{text: 'Continue', onPress:()=>  this.props.goBack()},
-              {text: 'Cancel', onPress:()=> console.log('Cancel')}
-              ],{cancelable: false}
-              )
-            
-            }}/>
+          
 
 
           <MyButton buttonName="Previous" currentQuestion={this.props.currentQuestion}  function={ () => {
@@ -36,6 +28,20 @@ export default class Actionbar extends React.Component{
             return this.props.onSubmit(this.props.questions);
             }}/>
           <MyButton buttonName="Next" currentQuestion={this.props.currentQuestion} function={ () => {
+            if (this.props.currentQuestion === (this.props.questions.length-1)){
+              return;
+            }else{
+              return this.props.onChangeQuestion(this.props.currentQuestion+1);
+            }}}/>
+        </View>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
+          <MyButton buttonName="Save" function={ () => {
+            return this.props.saveData();
+            }}/>
+          <MyButton buttonName="Load" function={ () => {
+            return this.props.loadData();
+            }}/>
+          <MyButton buttonName="Remove" currentQuestion={this.props.currentQuestion} function={ () => {
             if (this.props.currentQuestion === (this.props.questions.length-1)){
               return;
             }else{

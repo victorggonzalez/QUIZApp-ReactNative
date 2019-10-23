@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, Text, Image} from 'react-native';
+import {View, TextInput, Text, Image, StyleSheet} from 'react-native';
 
 //Componente que muestra un input para introducir una respuesta, o la respuesta introducida por el usuario
 export default class Answer extends React.Component{
@@ -7,7 +7,7 @@ export default class Answer extends React.Component{
 //Funcion que impide escribir en el input una vez que ha finalizado el juego
   disableAnswer(finished){
     if(finished === true){
-      return true;
+      return false;
     }
   }
   
@@ -20,8 +20,9 @@ export default class Answer extends React.Component{
             this.props.onQuestionAnswer(e.target.value);}}/>
       </div>*/
       <View style={{width:240,height:35,flexDirection:'row',alignItems:'center',borderRdius:4,borderColor:'black',borderWidth:2}}> 
-            <TextInput style={{marginLeft:15,fontSize:20}}
-            placeholder="Type your answer here"  disabled={this.disableAnswer(this.props.finished)} value={this.props.question.userAnswer || ''}
+            <TextInput style={styles.answer}
+            placeholder="Type your answer here" placeholderTextColor="#1376D2" selectionColor="#1376D2"
+            editable={this.disableAnswer(this.props.finished)} value={this.props.question.userAnswer || ''}
                 onChangeText={(text)=>{
                 this.props.onQuestionAnswer(text);}}
             />
@@ -30,3 +31,9 @@ export default class Answer extends React.Component{
     );
   }
 }
+const styles = StyleSheet.create({
+answer: {
+borderColor: '#1376D2',
+marginLeft:15,fontSize:20
+}
+})

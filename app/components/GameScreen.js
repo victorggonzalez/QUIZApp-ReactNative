@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image, YellowBox, StyleSheet, Button, ImageBackground} from 'react-native';
+import {Alert, AsyncStorage, View, Text, Image, YellowBox, StyleSheet, Button, ImageBackground} from 'react-native';
 import {Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 import Game from './Game.js';
 import Navbar from './Navbar.js';
@@ -32,10 +32,55 @@ class GameScreen extends Component{
         .catch(error => {
           console.log(error);
         });
-
-  
-
   }
+
+  async _saveData(){
+      try{
+            var currentQuestions = JSON.stringify(this.props.questions);
+            await AsyncStorage.setItem('@P2_2019_IWEB:quiz', currentQuestions)
+                
+            .then(Alert.alert(
+                "Success","Your questions have been saved.",
+                [{text:'OK',onPress:() => console.log('OK save')}
+                ],{ cancelable: false}
+            ));
+        }catch (error) {
+            console.log(error);
+            Alert.alert(
+                "Alert",
+                "There has been a problem while saving your questions.",
+                [{text:'OK',onPress:() => console.log('OK error save')}
+                ],{cancelable: false}
+            );
+        }
+}
+  async _loadData(){
+     try{
+            var stored = await AsyncStorage.getItem('@P2_2019_IWEB:quiz');
+            if (stored !== null){
+                var loaded = JSON.parse(stored);
+                this.props.dispatch(initQuestions(loaded));
+                Alert.alert(
+                    "Success","Your questions have been loaded successfully.",
+                    [{text:'Continue',onPress:() => console.log('OK load')}
+                    ],{ cancelable: false});
+            }
+            if (stored === null){
+                Alert.alert(
+                    "Alert", "There are no questions saved.",
+                    [{text:'OK',onPress:() => console.log('OK no load')}
+                    ],{ cancelable: false});
+            }
+        }catch (error) {
+            console.log(error);
+            Alert.alert(
+                "Alert","There has been a problem while loading your questions.",
+                [{text:'OK',onPress:() => console.log('OK error load')}
+                ],{ cancelable: false});
+        }
+}
+
+
 
   newQuestions(){
     let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=b61cccee4c3c81170f14"
@@ -65,7 +110,12 @@ class GameScreen extends Component{
       score={this.props.score}
       finished={this.props.finished}
       goBack={this.props.navigation.goBack}
+      saveData={this._saveData.bind(this)}
+      loadData = {this._loadData.bind(this)}
+
+
        />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)
+      
 
   let score = (this.props.finished)?
     <Button onPress={() => this.props.navigation.navigate('ScoreScreen',{score: this.props.score})} 
@@ -84,6 +134,8 @@ class GameScreen extends Component{
               finished={this.props.finished}
               timer={this.props.timer}
               newQuestions={this.newQuestions}
+              goBack={this.props.navigation.goBack}
+
              />
           </View>
           <View id="game" style={{flex:10, flexDirection: 'column'}}>

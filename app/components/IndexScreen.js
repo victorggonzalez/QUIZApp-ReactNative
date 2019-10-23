@@ -22,7 +22,10 @@ return (
 }
 const styles = StyleSheet.create({
   header:{
-    fontSize: 25, 
-    color: 'white'
+    fontSize: 50, 
+    color: 'white',
+    fontWeight: "600",
+    textShadowRadius: 10,
+    textShadowColor: 'white'
   }
 })

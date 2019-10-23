@@ -60,19 +60,19 @@ export default class Content extends React.Component{
 
       <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
          
-         <View id="question attachment" style={{flex:5,backgroundColor:'gray',alignSelf:'stretch'}}>
+         <View id="question attachment" style={{flex:5,alignSelf:'stretch'}}>
            <MyImage question={this.props.question}
            />
          </View>
         
-         <View id="question" style={{flex:2,backgroundColor:'green',flexDirection:'column',justifyContent:'flex-start'}}>
+         <View id="question" style={{flex:2}}>
            <Question question={this.props.question}
                       currentQuestion={this.props.currentQuestion}
                       questions={this.props.questions}
             />  
          </View>
         
-         <View id="answer" style={{flex:1,backgroundColor:'yellow',flexDirection:'column',justifyContent:'flex-start'}}>
+         <View id="answer" style={{flex:1,backgroundColor:'',flexDirection:'column',justifyContent:'flex-start'}}>
            <Answer question={this.props.question}
                     currentQuestion={this.props.currentQuestion}
                     onQuestionAnswer={this.props.onQuestionAnswer}

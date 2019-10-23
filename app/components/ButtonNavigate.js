@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 export default class ButtonNavigate extends React.Component {
 render() {
 return (
 <TouchableHighlight onPress={this.props.onPress}>
-<Text style={styles.text}>{this.props.text}</Text>
+		<View style={{backgroundColor: '#D0EAFF'}}>
+			<Text style={styles.text}>{this.props.text}</Text>
+		</View>
 </TouchableHighlight>
 )
 }
