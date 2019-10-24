@@ -19,6 +19,7 @@ export default class Answer extends React.Component{
           onChange={(e)=>{
             this.props.onQuestionAnswer(e.target.value);}}/>
       </div>*/
+
       <View style={{width:240,height:35,flexDirection:'row',alignItems:'center',borderRdius:4,borderColor:'black',borderWidth:2}}> 
             <TextInput style={styles.answer}
             placeholder="Type your answer here" placeholderTextColor='black' selectionColor="#1376D2"
