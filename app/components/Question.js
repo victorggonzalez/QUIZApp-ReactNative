@@ -19,7 +19,7 @@ emptyQuestions(questions){
         </div>*/
         <View style={{flex:1,flexDirection:'column',justifyContent:'space-around', alignItems:'center'}}> 
           <View style={styles.view}>
-                <Text style={{fontSize:20,color:'white', textAlign: 'justify'}}>
+                <Text style={{fontSize:20,color:'white', textAlign: 'center'}}>
                    Question {this.props.currentQuestion+1}
                 </Text> 
           </View>

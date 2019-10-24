@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, Image} from 'react-native';
+import {View, Text, TextInput, Image, TouchableHighlight, StyleSheet} from 'react-native';
 
 import MyImage from './MyImage';
 import Question from './Question';
@@ -50,27 +50,29 @@ export default class Content extends React.Component{
         </section>
   */
   render(){
-/*Cambiar antes del return
-    let authorPhoto = (this.props.question.author.photo !== null) ?
-    <img src={this.props.question.author.photo.url} width="100" height="100"  alt="Imagen"/> : 
-    <h1 style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</h1>
-    */
+
 
     return(
 
       <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
          
-         <View id="question attachment" style={{flex:5,alignSelf:'stretch'}}>
+         <View id="question attachment" style={{flex:4,alignSelf:'stretch'}}>
            <MyImage question={this.props.question}
            />
          </View>
+         <TouchableHighlight onPress={() => {this.props.setModalVisible(true)}}>
+              <View style={{backgroundColor: '#82A4C7'}}>
+                   <Text style={styles.text}>Show tips</Text>
+              </View>
+          </TouchableHighlight>
         
          <View id="question" style={{flex:2}}>
            <Question question={this.props.question}
                       currentQuestion={this.props.currentQuestion}
                       questions={this.props.questions}
             />  
-         </View>
+            
+        </View>
         
          <View id="answer" style={{flex:1,backgroundColor:'',flexDirection:'column',justifyContent:'flex-start'}}>
            <Answer question={this.props.question}
@@ -92,3 +94,16 @@ export default class Content extends React.Component{
   }
 
 }
+
+const styles = StyleSheet.create({
+text: {
+backgroundColor: 'transparent',
+color: 'white',
+borderWidth: 1,
+padding: 5,
+borderRadius: 50,
+borderColor: 'white',
+fontSize: 15,
+textAlign: 'center'
+}
+})

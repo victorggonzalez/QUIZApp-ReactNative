@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, View, Text, Image, YellowBox, StyleSheet, Button, ImageBackground} from 'react-native';
+import {Alert, AsyncStorage, View, Text, Image, StyleSheet, Button, ImageBackground, Modal, TouchableHighlight} from 'react-native';
 import {Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 import Game from './Game.js';
 import Navbar from './Navbar.js';
+import Tips from './Tips.js';
+import ButtonNavigate from './ButtonNavigate.js';
 import {connect} from 'react-redux';
 import {questionAnswer, changeQuestion, initQuestions, submit} from './../reducers/actions';
 
@@ -17,9 +19,7 @@ class GameScreen extends Component{
   constructor(props){
     super(props);
     this.newQuestions=this.newQuestions.bind(this);
-    YellowBox.ignoreWarnings([
-      'Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'
-    ])
+    this.state = {modalVisible:false};
 
   }
   componentDidMount(props) {
@@ -80,6 +80,10 @@ class GameScreen extends Component{
         }
 }
 
+_setModalVisible(visible){ this.setState({modalVisible: visible}); }
+ 
+
+
 
 
   newQuestions(){
@@ -112,6 +116,7 @@ class GameScreen extends Component{
       goBack={this.props.navigation.goBack}
       saveData={this._saveData.bind(this)}
       loadData = {this._loadData.bind(this)}
+      setModalVisible = {this._setModalVisible.bind(this)}
 
 
        />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)
@@ -122,10 +127,32 @@ class GameScreen extends Component{
     title="Check score"/>:<Button disabled={true}  title="Check score"/>
 
   return (
-    <View id="app" style={{flex:1, margin:0, flexDirection: 'column', justifyContent:'center'}}>
+  <View id="app" style={{flex:1, margin:0, flexDirection: 'column', justifyContent:'center'}}>
     <ImageBackground source={{uri: "https://fsb.zobj.net/crop.php?r=LuBOBwgmNp41v4868uXfH0ekybj8g5NELLGqbzICDc4K1YDwSbhLQ61O7HR3RSmx3W3g-VioujmVs2xhwUCOoQHkkcvaVWotVd4D8b-rhozvk5Aph51BztNlNvKwTatGmNdbeopREqQGz71I9FjPZ9S1SYhcUaTAKbeUqSWEK5Oqiupg-kNo9oOUuBOgZGe-E5BFa0FWJV26mrKE"}}
-   style={{width:'100%', height: '100%'}}>
-          <View id="navbar" style={{flex:1, backgroundColor: 'transparent'}} >
+          style={{width:'100%', height: '100%'}}>
+      <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {alert("User has tapped the back button")}}
+            presentationStyle="overFullScreen" >
+             <View style={{ flex: 1, flexDirection:'column', alignItems:'center', justifyContent:'center', backgroundColor: 'white'}}>
+             <ImageBackground source={{uri: "https://fsb.zobj.net/crop.php?r=LuBOBwgmNp41v4868uXfH0ekybj8g5NELLGqbzICDc4K1YDwSbhLQ61O7HR3RSmx3W3g-VioujmVs2xhwUCOoQHkkcvaVWotVd4D8b-rhozvk5Aph51BztNlNvKwTatGmNdbeopREqQGz71I9FjPZ9S1SYhcUaTAKbeUqSWEK5Oqiupg-kNo9oOUuBOgZGe-E5BFa0FWJV26mrKE"}}
+                            style={{width:'100%', height: '100%'}}>
+                   <TouchableHighlight style={{width: 50, height:50, margin:10, alignSelf:'flex-end' }} onPress={() => {this._setModalVisible(false)}}>
+                      <View style={{backgroundColor: '#1376D2'}}>
+                      <Text style={{fontSize:20, textAlign: 'center', borderWidth: 2,
+                          borderColor: 'white',borderRadius: 100, color: 'white'}}>X</Text>
+                      </View>
+                   </TouchableHighlight>
+                <Text style={styles.text}>Here are some tips from question {this.props.currentQuestion+1}</Text>
+                <Tips
+                  questions={this.props.questions}
+                  question={this.props.questions[this.props.currentQuestion]}
+                  currentQuestion={this.props.currentQuestion}
+                  onQuestionAnswer={(answer) =>{this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))}}
+                />
+             </ImageBackground>
+            </View>
+      </Modal>
+
+      <View id="navbar" style={{flex:1, backgroundColor: 'transparent'}}>
             <Navbar questions={this.props.questions}
               question={this.props.questions[this.props.currentQuestion]}
               currentQuestion={this.props.currentQuestion}
@@ -137,14 +164,13 @@ class GameScreen extends Component{
               goBack={this.props.navigation.goBack}
 
              />
-          </View>
-          <View id="game" style={{flex:10, flexDirection: 'column'}}>
-          {game}
-          
-          </View>
-          {score}
-        </ImageBackground>
       </View>
+      <View id="game" style={{flex:10, flexDirection: 'column'}}>
+        {game}
+      </View>
+      {score}
+      </ImageBackground>
+  </View>
 
 
   );
@@ -158,3 +184,14 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(GameScreen);
+
+const styles = StyleSheet.create({
+text: {
+padding: 20,
+margin: 20,
+backgroundColor: 'transparent',
+color: 'white',
+fontSize: 25,
+textAlign: 'center'
+}
+})

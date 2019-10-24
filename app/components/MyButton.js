@@ -39,7 +39,7 @@ export default class MyButton extends React.Component {
 
 	render() {
 		return(
-      <Button title={this.props.buttonName} style={this.props.style} disabled={this.disableButton(this.props.currentQuestion) || this.disableAll(this.props.finished)}  onPress={this.props.function}/>
+      <Button title={this.props.buttonName} color={this.props.color} disabled={this.disableButton(this.props.currentQuestion) || this.disableAll(this.props.finished)}  onPress={this.props.function}/>
 		);
 	}
 }

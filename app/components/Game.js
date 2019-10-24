@@ -18,6 +18,8 @@ export default class Game extends React.Component{
                         currentQuestion={this.props.currentQuestion}
                         onQuestionAnswer={this.props.onQuestionAnswer}
                         finished={this.props.finished}
+                        setModalVisible = {this.props.setModalVisible}
+
                         />
             </View>
             <View id="actionbar" style={{flex:1, flexDirection: 'column'}}>
@@ -30,7 +32,6 @@ export default class Game extends React.Component{
                           score={this.props.score}
                           finished={this.props.finished}
                           saveData = {this.props.saveData}
-
                           loadData = {this.props.loadData}
                 />
             </View>

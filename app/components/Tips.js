@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Text, Image, StyleSheet} from 'react-native';
 
 
 //Componente para mostrar los tips de cada pregunta
@@ -7,19 +8,19 @@ export default class Tips extends React.Component {
 	  showTips(question){
     if(question.tips.length !== 0){
       return (
-        <div>
-          <h1 >Tips:</h1>
-          <ul style={{marginBottom: '10px', marginLeft: '60px'}}>
+        <View>
+          
             {this.props.question.tips.map((tip,id)=>{
-			           return (<li style={{textAlign: 'left', paddingLeft:'0px'}}>{tip}</li>
+			           return (<Text key={id} style={styles.tips} >{tip}</Text>
                  );})}
-          </ul>
-        </div>
+            <Image source={{uri: this.props.question.author.photo.url}}/>
+        </View>
         );
     } else {return(
-			<h1><i>No tips available yet</i></h1>
+			<View><Text style={styles.notips} >No tips available yet</Text></View>
 
     );}
+   
 	}
 
 
@@ -31,3 +32,26 @@ export default class Tips extends React.Component {
 
 	}
 }
+
+const styles = StyleSheet.create({
+tips: {
+padding: 10,
+margin: 20,
+borderWidth: 2,
+borderColor:'white',
+backgroundColor: 'transparent',
+color: 'white',
+fontSize: 20,
+textAlign: 'center'
+},
+notips: {
+padding: 20,
+margin: 20,
+backgroundColor: 'transparent',
+color: 'white',
+fontSize: 20,
+textAlign: 'center',
+fontStyle: 'italic'
+
+}
+})

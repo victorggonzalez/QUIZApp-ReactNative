@@ -26,7 +26,7 @@ export default class Actionbar extends React.Component{
             }}}/>
           <MyButton buttonName="Submit" questions={this.props.questions} finished={this.props.finished} function={ () => {
             return this.props.onSubmit(this.props.questions);
-            }}/>
+            }} color='red' />
           <MyButton buttonName="Next" currentQuestion={this.props.currentQuestion} function={ () => {
             if (this.props.currentQuestion === (this.props.questions.length-1)){
               return;
@@ -47,6 +47,7 @@ export default class Actionbar extends React.Component{
             }else{
               return this.props.onChangeQuestion(this.props.currentQuestion+1);
             }}}/>
+
         </View>
      
     </View>

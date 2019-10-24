@@ -21,7 +21,7 @@ export default class Answer extends React.Component{
       </div>*/
       <View style={{width:240,height:35,flexDirection:'row',alignItems:'center',borderRdius:4,borderColor:'black',borderWidth:2}}> 
             <TextInput style={styles.answer}
-            placeholder="Type your answer here" placeholderTextColor="#1376D2" selectionColor="#1376D2"
+            placeholder="Type your answer here" placeholderTextColor='black' selectionColor="#1376D2"
             editable={this.disableAnswer(this.props.finished)} value={this.props.question.userAnswer || ''}
                 onChangeText={(text)=>{
                 this.props.onQuestionAnswer(text);}}
