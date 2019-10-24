@@ -32,6 +32,8 @@ export default class Game extends React.Component{
                           saveData = {this.props.saveData}
 
                           loadData = {this.props.loadData}
+                          deleteData={this.props.deleteData}
+
                 />
             </View>
       </View>

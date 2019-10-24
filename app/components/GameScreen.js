@@ -81,6 +81,32 @@ class GameScreen extends Component{
 }
 
 
+   async _deleteData(){
+        try{
+            await AsyncStorage.removeItem('@P2_2019_IWEB:quiz')
+                .then(
+            Alert.alert(
+                "Alert",
+                "Your saved questions have been deleted.",
+                [
+                    {text:'OK',onPress:() => console.log('OK pressed')}
+                ],
+                { cancelable: false}
+            ));
+        }catch (e) {
+            console.log(e);
+            Alert.alert(
+                "Alert",
+                "Your saved questions couldn't be deleted.",
+                [
+                    {text:'OK',onPress:() => console.log('OK pressed')}
+                ],
+                { cancelable: false}
+            );
+        }
+      }
+
+
 
   newQuestions(){
     let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=b61cccee4c3c81170f14"
@@ -112,6 +138,7 @@ class GameScreen extends Component{
       goBack={this.props.navigation.goBack}
       saveData={this._saveData.bind(this)}
       loadData = {this._loadData.bind(this)}
+      deleteData ={this._deleteData.bind(this)}
 
 
        />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)

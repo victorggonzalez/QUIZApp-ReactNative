@@ -41,12 +41,9 @@ export default class Actionbar extends React.Component{
           <MyButton buttonName="Load" function={ () => {
             return this.props.loadData();
             }}/>
-          <MyButton buttonName="Remove" currentQuestion={this.props.currentQuestion} function={ () => {
-            if (this.props.currentQuestion === (this.props.questions.length-1)){
-              return;
-            }else{
-              return this.props.onChangeQuestion(this.props.currentQuestion+1);
-            }}}/>
+          <MyButton buttonName="Remove"  function={ () => {
+              return this.props.deleteData();
+            }}/>
         </View>
      
     </View>
