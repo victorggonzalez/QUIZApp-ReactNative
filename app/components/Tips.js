@@ -8,24 +8,17 @@ export default class Tips extends React.Component {
 	 showTips(question){
     if(question.tips.length !== 0){
       return (
-        <View>
+        <View >
           
             {this.props.question.tips.map((tip,id)=>{
 			           return (<Text key={id} style={styles.tips} >{tip}</Text>
                  );})}
-            <Image source={{uri: this.props.question.author.photo.url}}/>
         </View>
         );
     } else {return(
 			<View><Text style={styles.notips} >No tips available yet</Text></View>
-
     );}
-   
-
 	}
-
-
-
 
 	render() {
 

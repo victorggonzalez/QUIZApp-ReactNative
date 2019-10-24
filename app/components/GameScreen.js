@@ -5,13 +5,10 @@ import Game from './Game.js';
 import Navbar from './Navbar.js';
 import Tips from './Tips.js';
 import ButtonNavigate from './ButtonNavigate.js';
+import AuthorInfo from './AuthorInfo.js'
 import {connect} from 'react-redux';
 import {questionAnswer, changeQuestion, initQuestions, submit} from './../reducers/actions';
 
-/*
-<ButtonPrueba
-onPress={() => this.props.navigation.goBack()} text={"Go back"}/>
-*/
 
 
 class GameScreen extends Component{
@@ -34,6 +31,7 @@ class GameScreen extends Component{
         });
   }
 
+  //Funcion asincrona para guardar las preguntas
   async _saveData(){
       try{
             var currentQuestions = JSON.stringify(this.props.questions);
@@ -54,6 +52,7 @@ class GameScreen extends Component{
             );
         }
 }
+  //Funcion asincrona para cargar las preguntas
   async _loadData(){
      try{
             var stored = await AsyncStorage.getItem('@P2_2019_IWEB:quiz');
@@ -79,39 +78,30 @@ class GameScreen extends Component{
                 ],{ cancelable: false});
         }
 }
-
-_setModalVisible(visible){ this.setState({modalVisible: visible}); }
- 
-
-
-
+  //Funcion asincrona para borrar las preguntas previamente almacenadas
    async _deleteData(){
         try{
             await AsyncStorage.removeItem('@P2_2019_IWEB:quiz')
                 .then(
             Alert.alert(
-                "Alert",
-                "Your saved questions have been deleted.",
-                [
-                    {text:'OK',onPress:() => console.log('OK pressed')}
-                ],
-                { cancelable: false}
+                "Alert","Your saved questions have been deleted.",
+                [{text:'Continue', onPress:() => console.log('OK delete pressed')}
+                ],{cancelable: false}
             ));
-        }catch (e) {
-            console.log(e);
+        }catch (error) {
+            console.log(error);
             Alert.alert(
-                "Alert",
-                "Your saved questions couldn't be deleted.",
-                [
-                    {text:'OK',onPress:() => console.log('OK pressed')}
-                ],
-                { cancelable: false}
+                "Alert","Your saved questions couldn't be deleted.",
+                [{text:'OK',onPress:() => console.log('OK error delete')}
+                ],{cancelable: false}
             );
         }
       }
+//Funcion para hacer visible el modal
+_setModalVisible(visible){ this.setState({modalVisible: visible}); }
 
 
-
+  //Funcion para obtener nuevas preguntas
   newQuestions(){
     let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=b61cccee4c3c81170f14"
 
@@ -127,7 +117,7 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
   render(){
   console.log(this.props);
 
-  //Comprueba que el array de preguntas esta completo, y en caso contrario muestra un gif de carga
+  //Comprueba que el array de preguntas esta completo, y en caso contrario muestra una imagen de carga
  let game = (this.props.questions.length === 10) ?
   (<Game questions={this.props.questions}
       question={this.props.questions[this.props.currentQuestion]}
@@ -146,9 +136,9 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
       deleteData ={this._deleteData.bind(this)}
 
 
-       />) : (<Image source={{uri: 'https://www.freeiconspng.com/uploads/spinner-icon-0.gif'}}/>)
+       />) : (  <Image source={{uri: "https://icon-library.net/images/loading-icon-png/loading-icon-png-22.jpg"}} style={{width: '80%', height:'30%', alignSelf:'center'}}/>)
       
-
+  //Comprueba que el juego ha terminado para poder ver la puntuacion
   let score = (this.props.finished)?
     <Button onPress={() => this.props.navigation.navigate('ScoreScreen',{score: this.props.score})} 
     title="Check score"/>:<Button disabled={true}  title="Check score"/>
@@ -157,23 +147,25 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
   <View id="app" style={{flex:1, margin:0, flexDirection: 'column', justifyContent:'center'}}>
     <ImageBackground source={{uri: "https://fsb.zobj.net/crop.php?r=LuBOBwgmNp41v4868uXfH0ekybj8g5NELLGqbzICDc4K1YDwSbhLQ61O7HR3RSmx3W3g-VioujmVs2xhwUCOoQHkkcvaVWotVd4D8b-rhozvk5Aph51BztNlNvKwTatGmNdbeopREqQGz71I9FjPZ9S1SYhcUaTAKbeUqSWEK5Oqiupg-kNo9oOUuBOgZGe-E5BFa0FWJV26mrKE"}}
           style={{width:'100%', height: '100%'}}>
-      <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {alert("User has tapped the back button")}}
+
+      <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {this._setModalVisible(false)}}
             presentationStyle="overFullScreen" >
              <View style={{ flex: 1, flexDirection:'column', alignItems:'center', justifyContent:'center', backgroundColor: 'white'}}>
              <ImageBackground source={{uri: "https://fsb.zobj.net/crop.php?r=LuBOBwgmNp41v4868uXfH0ekybj8g5NELLGqbzICDc4K1YDwSbhLQ61O7HR3RSmx3W3g-VioujmVs2xhwUCOoQHkkcvaVWotVd4D8b-rhozvk5Aph51BztNlNvKwTatGmNdbeopREqQGz71I9FjPZ9S1SYhcUaTAKbeUqSWEK5Oqiupg-kNo9oOUuBOgZGe-E5BFa0FWJV26mrKE"}}
                             style={{width:'100%', height: '100%'}}>
-                   <TouchableHighlight style={{width: 50, height:50, margin:10, alignSelf:'flex-end' }} onPress={() => {this._setModalVisible(false)}}>
-                      <View style={{backgroundColor: '#1376D2'}}>
+                   <TouchableHighlight activeOpacity={1} underlayColor='#1376D2' style={{width: 50, height:50, margin:10, alignSelf:'flex-end' }} onPress={() => {this._setModalVisible(false)}}>
                       <Text style={{fontSize:20, textAlign: 'center', borderWidth: 2,
                           borderColor: 'white',borderRadius: 100, color: 'white'}}>X</Text>
-                      </View>
                    </TouchableHighlight>
                 <Text style={styles.text}>Here are some tips from question {this.props.currentQuestion+1}</Text>
                 <Tips
                   questions={this.props.questions}
                   question={this.props.questions[this.props.currentQuestion]}
                   currentQuestion={this.props.currentQuestion}
-                  onQuestionAnswer={(answer) =>{this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))}}
+                />
+                <AuthorInfo
+                  questions={this.props.questions}
+                  question={this.props.questions[this.props.currentQuestion]}
                 />
              </ImageBackground>
             </View>
@@ -194,6 +186,7 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
       </View>
       <View id="game" style={{flex:10, flexDirection: 'column'}}>
         {game}
+      
       </View>
       {score}
       </ImageBackground>

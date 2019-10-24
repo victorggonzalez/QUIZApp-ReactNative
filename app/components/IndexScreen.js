@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground} from 'react-native';
 import ButtonNavigate from './ButtonNavigate.js';
+
+//Pantalla de inicio que muestra la cabecera y un botón para iniciar el quiz
 export default class IndexScreen extends React.Component {
 render() {
 return (
@@ -12,9 +14,9 @@ return (
 			<Text style={styles.header} >QUIZ Game</Text>
 		</View>
 		<View style={{ flex:4, flexDirection:'column', alignItems:'center', justifyContent:'flex-end'}}>
-
 			<ButtonNavigate onPress={() => this.props.navigation.navigate('GameScreen')} text={"Play"}/>
 		</View>
+		
 	</ImageBackground>
 </View>
 )

@@ -8,10 +8,7 @@ import MyButton from './MyButton';
 
 
 export default class Content extends React.Component{
-
- 
-
- 
+  //Funcion que comprueba que la pregunta tiene tips disponibles y los muestra. 
   showTips(question){
     if(question.tips.length !== 0){
       return (
@@ -35,18 +32,18 @@ export default class Content extends React.Component{
 
       <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
          
-         <View id="question attachment" style={{flex:4,alignSelf:'stretch'}}>
+         <View id="question attachment" style={{flex:7,alignSelf:'stretch'}}>
            <MyImage question={this.props.question}
            />
          </View>
-         <TouchableHighlight onPress={() => {this.props.setModalVisible(true)}}>
-              <View style={{backgroundColor: '#82A4C7'}}>
-                   <Text style={styles.text}>Show tips</Text>
-              </View>
-          </TouchableHighlight>
+        <View id="tips button" style={{flex:1}}>
 
+             <TouchableHighlight activeOpacity={1} underlayColor='#A5BDD5' onPress={() => {this.props.setModalVisible(true)}}>
+                       <Text style={styles.text}>Show tips</Text>
+              </TouchableHighlight>
+        </View>
         
-         <View id="question" style={{flex:4,flexDirection:'column',justifyContent:'flex-start'}}>
+         <View id="question" style={{flex:3,flexDirection:'column',justifyContent:'flex-start'}}>
 
            <Question question={this.props.question}
                       currentQuestion={this.props.currentQuestion}
@@ -55,7 +52,7 @@ export default class Content extends React.Component{
             
         </View>
         
-         <View id="answer" style={{flex:1,backgroundColor:'',flexDirection:'column',justifyContent:'flex-start'}}>
+         <View id="answer" style={{flex:1,flexDirection:'column',justifyContent:'flex-start'}}>
            <Answer question={this.props.question}
                     currentQuestion={this.props.currentQuestion}
                     onQuestionAnswer={this.props.onQuestionAnswer}
