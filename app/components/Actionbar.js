@@ -11,7 +11,7 @@ export default class Actionbar extends React.Component{
 
     return(
     <View style={{flex:1, flexDirection: 'column'}}>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between', alignItems: 'center', margin:20}}>
           
           <MyButton buttonName="Previous" currentQuestion={this.props.currentQuestion}  function={ () => {
             if (this.props.currentQuestion!==0){
@@ -19,7 +19,7 @@ export default class Actionbar extends React.Component{
             }else{
               return;
             }}}/>
-          <MyButton buttonName="Submit" questions={this.props.questions} finished={this.props.finished} function={ () => {
+          <MyButton buttonName="Submit all" questions={this.props.questions} finished={this.props.finished} function={ () => {
             return this.props.onSubmit(this.props.questions);
             }} color='red' />
           <MyButton buttonName="Next" currentQuestion={this.props.currentQuestion} function={ () => {
@@ -29,7 +29,7 @@ export default class Actionbar extends React.Component{
               return this.props.onChangeQuestion(this.props.currentQuestion+1);
             }}}/>
         </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around', alignItems: 'center'}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between', alignItems: 'center', margin:20}}>
           <MyButton buttonName="Save" function={ () => {
             return this.props.saveData();
             }}/>

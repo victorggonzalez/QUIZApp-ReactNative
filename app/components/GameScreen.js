@@ -157,7 +157,7 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
                       <Text style={{fontSize:20, textAlign: 'center', borderWidth: 2,
                           borderColor: 'white',borderRadius: 100, color: 'white'}}>X</Text>
                    </TouchableHighlight>
-                <Text style={styles.text}>Here are some tips from question {this.props.currentQuestion+1}</Text>
+                <Text style={styles.text}>Here are some tips for question {this.props.currentQuestion+1}</Text>
                 <Tips
                   questions={this.props.questions}
                   question={this.props.questions[this.props.currentQuestion]}
@@ -188,7 +188,9 @@ _setModalVisible(visible){ this.setState({modalVisible: visible}); }
         {game}
       
       </View>
+      <View style={{margin:20}}>
       {score}
+      </View>
       </ImageBackground>
   </View>
 
