@@ -5,7 +5,7 @@ import { View, Text, Image, StyleSheet} from 'react-native';
 //Componente para mostrar los tips de cada pregunta
 export default class Tips extends React.Component {
   //Funcion que muestra los tips de la pregunta si los tiene. Si no, muestra un mensaje. 
-	  showTips(question){
+	 showTips(question){
     if(question.tips.length !== 0){
       return (
         <View>
@@ -21,6 +21,7 @@ export default class Tips extends React.Component {
 
     );}
    
+
 	}
 
 
