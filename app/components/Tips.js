@@ -4,7 +4,7 @@ import React from 'react';
 //Componente para mostrar los tips de cada pregunta
 export default class Tips extends React.Component {
   //Funcion que muestra los tips de la pregunta si los tiene. Si no, muestra un mensaje. 
-	  showTips(question){
+	 showTips(question){
     if(question.tips.length !== 0){
       return (
         <div>
@@ -19,7 +19,8 @@ export default class Tips extends React.Component {
     } else {return(
 			<h1><i>No tips available yet</i></h1>
 
-    );}
+    );
+  }
 	}
 
 

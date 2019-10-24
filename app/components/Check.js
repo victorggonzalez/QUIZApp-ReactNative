@@ -20,8 +20,8 @@ export default class Check extends React.Component{
 
 
     return(
-   <View style={{flex:1, backgroundColor:'blue'}}>
-             <View style={{flex:1,directionFlex:'row',alignItems:'center'}}>
+   <View style={{flex:1}}>
+             <View style={{flex:1,directionFlex:'row',alignItems:'center',justifyContent:'flex-end'}}>
                 
                   {check}{wrong}
                 

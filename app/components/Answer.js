@@ -19,7 +19,7 @@ export default class Answer extends React.Component{
           onChange={(e)=>{
             this.props.onQuestionAnswer(e.target.value);}}/>
       </div>*/
-      <View style={{width:240,height:35,flexDirection:'row',alignItems:'center',borderRdius:4,borderColor:'black',borderWidth:2}}> 
+      <View style={{width:240,height:35,flexDirection:'row',alignItems:'center',borderRdius:4,borderColor:'black',borderWidth:2,alignSelf:'flex-end'}}> 
             <TextInput style={{marginLeft:15,fontSize:20}}
             placeholder="Type your answer here"  disabled={this.disableAnswer(this.props.finished)} value={this.props.question.userAnswer || ''}
                 onChangeText={(text)=>{

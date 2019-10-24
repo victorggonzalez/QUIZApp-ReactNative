@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, TextInput, Image} from 'react-native';
+import {View, Text, TextInput, Image , Button, DrawerLayoutAndroid} from 'react-native';
 
 import MyImage from './MyImage';
 import Question from './Question';
 import Answer from './Answer';
-import Tips from './Tips';
 import Check from './Check';
+import MyButton from './MyButton';
 
 
 export default class Content extends React.Component{
@@ -48,36 +48,87 @@ export default class Content extends React.Component{
         </div>
         </div>
         </section>
+
+
   */
+
+  jjj() {
+  var navigationView = (
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+    </View>
+  );
+  return (
+    <DrawerLayoutAndroid
+      drawerWidth={300}
+      drawerPosition={DrawerLayoutAndroid.positions.Left}
+      renderNavigationView={() => navigationView}>
+      <View style={{flex: 1, alignItems: 'center'}}>
+        <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
+        <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
+      </View>
+    </DrawerLayoutAndroid>
+  );
+}
+  showTips(question){
+    if(question.tips.length !== 0){
+      return (
+        <View>
+          <Text style={{fontSize:20}}>Tips: Created by: {this.props.question.author.username}</Text>
+          <View style={{marginBottom: '10px', marginLeft: '60px'}}>
+            {this.props.question.tips.map((tip,id)=>{
+                 return (<Text style={{textAlign: 'left', paddingLeft:'0px'}}>{tip}</Text>
+                 );})}
+          </View>
+        </View>
+        );
+    } else {return(
+      <Text>No tips available yet</Text>
+
+    );
+  }
+  }
   render(){
-/*Cambiar antes del return
-    let authorPhoto = (this.props.question.author.photo !== null) ?
-    <img src={this.props.question.author.photo.url} width="100" height="100"  alt="Imagen"/> : 
-    <h1 style={{color: 'red', textAlign: 'center'}}>IMAGE NOT AVAILABLE</h1>
-    */
 
     return(
 
       <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
          
-         <View id="question attachment" style={{flex:5,backgroundColor:'gray',alignSelf:'stretch'}}>
+         <View id="question attachment" style={{flex:10,alignSelf:'stretch'}}>
            <MyImage question={this.props.question}
            />
          </View>
+
         
-         <View id="question" style={{flex:2,backgroundColor:'green',flexDirection:'column',justifyContent:'flex-start'}}>
+         <View id="question" style={{flex:4,flexDirection:'column',justifyContent:'flex-start'}}>
            <Question question={this.props.question}
                       currentQuestion={this.props.currentQuestion}
                       questions={this.props.questions}
             />  
          </View>
-        
-         <View id="answer" style={{flex:1,backgroundColor:'yellow',flexDirection:'column',justifyContent:'flex-start'}}>
-           <Answer question={this.props.question}
-                    currentQuestion={this.props.currentQuestion}
-                    onQuestionAnswer={this.props.onQuestionAnswer}
-                    finished={this.props.finished}
-            /> 
+
+         <View id="espacio en blanco" style={{flex:1}}>
+         </View>
+
+
+         <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}>
+             <View id="answer" style={{flex:4,flexDirection:'column',justifyContent:'center'}}>
+                  <Answer question={this.props.question}
+                      currentQuestion={this.props.currentQuestion}
+                      onQuestionAnswer={this.props.onQuestionAnswer}
+                      finished={this.props.finished}
+                  /> 
+             </View>
+
+             <View id="tips" style={{flex:1,marginLeft:10,marginRight:10}}>
+            
+               <Button title='?' onPress={() => this.jjj()
+               
+               }
+
+               />
+                 
+             </View>
          </View>
 
          <View id="check" style={{flex:1}}>
