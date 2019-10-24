@@ -29,7 +29,9 @@ export default class Game extends React.Component{
                           onSubmit={this.props.onSubmit}
                           score={this.props.score}
                           finished={this.props.finished}
-                          goBack={this.props.goBack}
+                          saveData = {this.props.saveData}
+
+                          loadData = {this.props.loadData}
                 />
             </View>
       </View>

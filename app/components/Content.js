@@ -55,7 +55,7 @@ export default class Content extends React.Component{
   jjj() {
   var navigationView = (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+      <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I m in the Drawer!</Text>
     </View>
   );
   return (
@@ -95,12 +95,14 @@ export default class Content extends React.Component{
       <View style={{flex:1,flexDirection:'column',justifyContent:'space-around',alignItems:'center'}}>
          
          <View id="question attachment" style={{flex:10,alignSelf:'stretch'}}>
+
            <MyImage question={this.props.question}
            />
          </View>
 
         
          <View id="question" style={{flex:4,flexDirection:'column',justifyContent:'flex-start'}}>
+
            <Question question={this.props.question}
                       currentQuestion={this.props.currentQuestion}
                       questions={this.props.questions}
@@ -129,6 +131,7 @@ export default class Content extends React.Component{
                />
                  
              </View>
+
          </View>
 
          <View id="check" style={{flex:1}}>
